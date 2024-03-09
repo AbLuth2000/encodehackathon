@@ -94,9 +94,6 @@ def main():
 
     update_mongo_db(bearer_token, conversation_output['output']['conversation']['id'])
 
-    # Logout of bearer token
-    # logout(get_login_output['output'])
-
     return conversation_output
 
 main()
