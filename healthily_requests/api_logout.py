@@ -12,7 +12,6 @@ def logout(bearer):
     try:
         response = requests.post(url, headers=headers)
 
-        print(response.text)
         statusCode = response.status_code
         response = response.json()
 

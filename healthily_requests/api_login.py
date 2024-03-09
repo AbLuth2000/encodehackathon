@@ -26,7 +26,7 @@ def get_login():
 
     try:
         response = requests.post(url, json=payload, headers=headers)
-        print(response.text)
+
         statusCode = response.status_code
         response = response.json()
 

@@ -15,13 +15,15 @@ key = os.getenv('HEALTHILY_API_KEY')
 def start_conversation(bearer_token):
     payload = {
         "answer": {
-            "type": "entry",
-            "name": "test",
-            "gender": "male",
-            "year_of_birth": 2000,
-            "initial_symptom": "My stomach is hurting.",
-            "other": True
-        }
+            "type": "generic",
+            "input": {
+                "include": ["clarify_CM001658"],
+                "exclude": []
+            }
+        },
+        "conversation": {
+            "id": "{{conversation_id}}"
+        } 
     }
     headers = {
         "accept": "application/json",
@@ -39,7 +41,8 @@ def start_conversation(bearer_token):
         if statusCode == 200:
             return {
                 "statusCode": 200,
-                "output": response
+                "output": response,
+
             }
         else:
             return {
@@ -59,13 +62,7 @@ def main():
     get_login_output = get_login()
     bearer_token = "Bearer " + get_login_output['output']
 
-    # Start conversation
-    conversation_output = start_conversation(bearer_token)
-    print(conversation_output)
+    print(start_conversation(bearer_token))
 
-    # Logout of bearer token
-    logout(get_login_output['output'])
-
-    return conversation_output
 
 main()
