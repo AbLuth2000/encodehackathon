@@ -3,6 +3,8 @@ from api_login import get_login
 from api_logout import logout
 from dotenv import load_dotenv
 import os
+from pymongo import MongoClient
+from bson import ObjectId
 
 # Load variables from .env into environment
 load_dotenv()
@@ -10,6 +12,8 @@ load_dotenv()
 # Constants
 url = "https://portal.your.md/v4/chat"
 key = os.getenv('HEALTHILY_API_KEY')
+mongo_username = os.getenv('MONGODB_USERNAME')
+mongo_password = os.getenv('MONGODB_PASSWORD')
 
 
 def start_conversation(bearer_token):
@@ -54,6 +58,31 @@ def start_conversation(bearer_token):
         }
 
 
+def update_mongo_db(bearer_token, conversation_id):
+    mongo_uri = f"mongodb+srv://{mongo_username}:{mongo_password}@healthilycluster.q61yhul.mongodb.net/"
+    client = MongoClient(mongo_uri)
+    db = client['Conversations']
+    collection = db['HealthilyCluster']
+
+    filter = {'_id': ObjectId('65eccdcca76d4803694c0cb2')}
+    update_token = {'$set': {'bearer_token': bearer_token}}
+    token_result = collection.update_one(filter, update_token)
+
+    if token_result.modified_count > 0:
+        print("Bearer token updated successfully.")
+    else:
+        print("No document found matching the provided filter.")
+
+    update_conversation = {'$set': {'conversation_id': conversation_id}}
+    conversation_result = collection.update_one(filter, update_conversation)
+
+    if conversation_result.modified_count > 0:
+        print("Conversation ID updated successfully.")
+    else:
+        print("No document found matching the provided filter.")
+
+
+
 def main():
     # Get bearer token to use for API calls
     get_login_output = get_login()
@@ -63,8 +92,10 @@ def main():
     conversation_output = start_conversation(bearer_token)
     print(conversation_output)
 
+    update_mongo_db(bearer_token, conversation_output['output']['conversation']['id'])
+
     # Logout of bearer token
-    logout(get_login_output['output'])
+    # logout(get_login_output['output'])
 
     return conversation_output
 
