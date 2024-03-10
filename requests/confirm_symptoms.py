@@ -5,6 +5,7 @@ from dotenv import load_dotenv
 import os
 from pymongo import MongoClient
 from bson import ObjectId
+from healthily_requests.chatbot_general import Chatbot
 
 # Load variables from .env into environment
 load_dotenv()
@@ -76,6 +77,10 @@ def confirm_symtoms(bearer_token, conversation):
             "statusCode": 500,
             "output": f"An error occured: {e}"
         }
+
+
+# def check_user_input():
+
 
 
 def main():

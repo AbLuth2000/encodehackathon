@@ -5,6 +5,7 @@ from dotenv import load_dotenv
 import os
 from pymongo import MongoClient
 from bson import ObjectId
+from enhance_output import enhance_output
 
 # Load variables from .env into environment
 load_dotenv()
@@ -58,29 +59,26 @@ def start_conversation(bearer_token, name, gender, year_of_birth, initial_sympto
         }
 
 
-def update_mongo_db(bearer_token, conversation_id):
+def update_mongo_db(bearer_token, conversation_id, latest_message):
     mongo_uri = f"mongodb+srv://{mongo_username}:{mongo_password}@healthilycluster.q61yhul.mongodb.net/"
     client = MongoClient(mongo_uri)
     db = client['Conversations']
     collection = db['HealthilyCluster']
 
     filter = {'_id': ObjectId('65eccdcca76d4803694c0cb2')}
-    update_token = {'$set': {'bearer_token': bearer_token}}
+    update_token = {
+        '$set': {
+            'bearer_token': bearer_token,
+            'conversation_id': conversation_id,
+            'latest_healthily_output': latest_message
+        }
+    }
     token_result = collection.update_one(filter, update_token)
 
     if token_result.modified_count > 0:
-        print("Bearer token updated successfully.")
+        print("MongoDB updated successfully.")
     else:
         print("No document found matching the provided filter.")
-
-    update_conversation = {'$set': {'conversation_id': conversation_id}}
-    conversation_result = collection.update_one(filter, update_conversation)
-
-    if conversation_result.modified_count > 0:
-        print("Conversation ID updated successfully.")
-    else:
-        print("No document found matching the provided filter.")
-
 
 
 def main(name, gender, year_of_birth, initial_symptom):
@@ -92,10 +90,13 @@ def main(name, gender, year_of_birth, initial_symptom):
     conversation_output = start_conversation(bearer_token, name, gender, year_of_birth, initial_symptom)
     print(conversation_output)
 
-    update_mongo_db(bearer_token, conversation_output['output']['conversation']['id'])
+    update_mongo_db(bearer_token, conversation_output['output']['conversation']['id'], conversation_output['output']['question'])
+
+    enhanced_output = enhance_output(conversation_output['output']['question'])
+    print(enhanced_output)
 
     return conversation_output
 
-main("Abhyuday", "male", 2000, "I have a stomach ache.")
+main("Abhyuday", "male", 2000, "I have a rash on my neck.")
 
 # Next choices confirm symptoms or restart conversation with updated initial symptoms
