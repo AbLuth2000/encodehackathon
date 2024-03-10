@@ -21,17 +21,6 @@ Our intention with this solution was the following workflow:
 - Our python functions we call the Healthily API with their inputs.
 - We then use the Healthily API's outputs and pass them into our 'enhance' function which uses Perplexity's API and makes the outputs more compassionate. These new and improved outputs are then returned to the react app as a message. The original meaning of Healthily's outputs remains the same, as do the sentences themselves. This means nothing is lst within the consultation workflow.
 
-## Features
-- [Next.js](https://nextjs.org) App Router
-- React Server Components (RSCs), Suspense, and Server Actions
-- [Vercel AI SDK](https://sdk.vercel.ai/docs) for streaming chat UI
-- Support for OpenAI (default), Anthropic, Cohere, Hugging Face, or custom AI chat models and/or LangChain
-- [shadcn/ui](https://ui.shadcn.com)
-  - Styling with [Tailwind CSS](https://tailwindcss.com)
-  - [Radix UI](https://radix-ui.com) for headless component primitives
-  - Icons from [Phosphor Icons](https://phosphoricons.com)
-- Chat History, rate limiting, and session storage with [Vercel KV](https://vercel.com/storage/kv)
-- [NextAuth.js](https://github.com/nextauthjs/next-auth) for authentication
 
 ## Model Providers
 
