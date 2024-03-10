@@ -6,6 +6,8 @@ import os
 from pymongo import MongoClient
 from bson import ObjectId
 from enhance_output import enhance_output
+from playsound import playsound
+from text_to_speech import output_to_mp3
 
 # Load variables from .env into environment
 load_dotenv()
@@ -93,7 +95,11 @@ def main(name, gender, year_of_birth, initial_symptom):
     update_mongo_db(bearer_token, conversation_output['output']['conversation']['id'], conversation_output['output']['question'])
 
     enhanced_output = enhance_output(conversation_output['output']['question'])
+    output_to_mp3(enhanced_output)
     print(enhanced_output)
+
+    playsound('requests/speech.mp3')
+    print('Playing sound using  playsound')
 
     return conversation_output
 

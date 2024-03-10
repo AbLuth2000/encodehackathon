@@ -13,7 +13,7 @@ def output_to_mp3(text):
     response = client.audio.speech.create(
         model="tts-1",
         voice="alloy",
-        input="Today ng people love!"
+        input=text
     )
 
     response.stream_to_file(speech_file_path)
