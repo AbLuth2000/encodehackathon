@@ -5,7 +5,7 @@ from dotenv import load_dotenv
 import os
 from pymongo import MongoClient
 from bson import ObjectId
-from healthily_requests.chatbot_general import Chatbot
+from chatbot_general import Chatbot
 
 # Load variables from .env into environment
 load_dotenv()

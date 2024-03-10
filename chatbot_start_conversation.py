@@ -42,7 +42,9 @@ class Chatbot:
         # self.__prompt = PromptTemplate.from_template(template=self.__prompt_template)
         self.__system = """You are a medical assissant that will be helping patients to enter the correct information required
         for a proper diagosis of their symptoms. The patients will have to enter their name, gender and year of birth and a symptoms of their illness.
-        Check if the user has entered their name, gender and year of birth and a symptoms of their illness. If so then repeat their name, gender and year of birth and symptons. If not then kindly tell which infomation is missing"""
+        Check if the user has entered their name, gender and year of birth and a symptoms of their illness. If so then repeat their name, gender and year of birth and symptons. 
+        If not then kindly tell which infomation is missing. If there is information missing always start your response with: "I'm sorry, I need some more information."
+        """
         self.__human = "{input}"
         self.__promptTemplate = ChatPromptTemplate.from_messages([("system", self.__system), ("human", self.__human)])
 
@@ -57,7 +59,7 @@ class Chatbot:
         # self.__chain = LLMChain(llm=self.__llm, prompt=self.__prompt_formatted_str)
         # response = self.__llm.predict(self.__prompt_formatted_str)
         
-        self.__chain = self.__promptTemplate |self.__llm 
+        self.__chain = self.__promptTemplate |self.__llm
         response = self.__chain.invoke({"input": prompt})
 
         return response.content
