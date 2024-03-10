@@ -33,18 +33,18 @@ def get_mongo_values():
         return None
 
 
-def confirm_symtoms(bearer_token, conversation):
+def add_duration(bearer_token, conversation):
     payload = {
         "answer": {
             "type": "generic",
             "input": {
-                "include": ["assessment_C0000737"],
-                "exclude": []
+                "include": ["hour"],
+                "exclude": ["day", "week", "month", "year"]
             }
         },
         "conversation": {
             "id": conversation
-        } 
+        }
     }
     headers = {
         "accept": "application/json",
@@ -81,9 +81,9 @@ def confirm_symtoms(bearer_token, conversation):
 def main():
     mongo_values = get_mongo_values()
 
-    print(confirm_symtoms(mongo_values['bearer_token'], mongo_values['conversation_id']))
+    print(add_duration(mongo_values['bearer_token'], mongo_values['conversation_id']))
 
 
 main()
 
-# Next choice continue assessment or add symptoms
+# Next get health background issue IDs

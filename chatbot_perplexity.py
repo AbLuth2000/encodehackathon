@@ -58,13 +58,9 @@ class Chatbot:
         # response = self.__llm.predict(self.__prompt_formatted_str)
         
         self.__chain = self.__promptTemplate |self.__llm 
-        response = self.__chain.invoke({"input": prompt}))
+        response = self.__chain.invoke({"input": prompt})
 
         return response.content
-
-
-
-
 
 
 if __name__ == "__main__":

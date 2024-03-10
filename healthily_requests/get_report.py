@@ -15,6 +15,12 @@ key = os.getenv('HEALTHILY_API_KEY')
 mongo_username = os.getenv('MONGODB_USERNAME')
 mongo_password = os.getenv('MONGODB_PASSWORD')
 
+google_maps_urls = {
+    "hospital": "https://www.google.com/maps/search/nearest+hospital",
+    "pharmacy": "https://www.google.com/maps/search/nearest+pharmacy",
+    "telemedecine": ""
+}
+
 
 def get_report(bearer_token, conversation_id):
     payload = {
@@ -83,9 +89,15 @@ def main():
     report_diagnosis = get_report(mongo_values['bearer_token'], mongo_values['conversation_id'])
     print(report_diagnosis)
 
+    print(report_diagnosis['output']['report']['summary']['consultation_triage']['triage'])
+
     # Logout of bearer token
     # logout(get_login_output['output'])
 
     return report_diagnosis
 
 main()
+
+# If emergency/urgent - nearest hospital
+# If routine call telepharmacy or nearest pharmacy
+# If self-care / self-limiting call telepharmacy or nothing

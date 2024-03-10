@@ -16,14 +16,14 @@ mongo_username = os.getenv('MONGODB_USERNAME')
 mongo_password = os.getenv('MONGODB_PASSWORD')
 
 
-def start_conversation(bearer_token):
+def start_conversation(bearer_token, name, gender, year_of_birth, initial_symptom):
     payload = {
         "answer": {
             "type": "entry",
-            "name": "test",
-            "gender": "male",
-            "year_of_birth": 2000,
-            "initial_symptom": "My stomach is hurting.",
+            "name": name,
+            "gender": gender,
+            "year_of_birth": year_of_birth,
+            "initial_symptom": initial_symptom,
             "other": True
         }
     }
@@ -83,17 +83,19 @@ def update_mongo_db(bearer_token, conversation_id):
 
 
 
-def main():
+def main(name, gender, year_of_birth, initial_symptom):
     # Get bearer token to use for API calls
     get_login_output = get_login()
     bearer_token = "Bearer " + get_login_output['output']
 
     # Start conversation
-    conversation_output = start_conversation(bearer_token)
+    conversation_output = start_conversation(bearer_token, name, gender, year_of_birth, initial_symptom)
     print(conversation_output)
 
     update_mongo_db(bearer_token, conversation_output['output']['conversation']['id'])
 
     return conversation_output
 
-main()
+main("Abhyuday", "male", 2000, "I have a stomach ache.")
+
+# Next choices confirm symptoms or restart conversation with updated initial symptoms

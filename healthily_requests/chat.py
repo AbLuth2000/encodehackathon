@@ -33,15 +33,9 @@ def get_mongo_values():
         return None
 
 
-def confirm_symtoms(bearer_token, conversation):
+def chat(bearer_token, conversation, payload_answer):
     payload = {
-        "answer": {
-            "type": "generic",
-            "input": {
-                "include": ["assessment_C0000737"],
-                "exclude": []
-            }
-        },
+        "answer": payload_answer,
         "conversation": {
             "id": conversation
         } 
@@ -81,9 +75,7 @@ def confirm_symtoms(bearer_token, conversation):
 def main():
     mongo_values = get_mongo_values()
 
-    print(confirm_symtoms(mongo_values['bearer_token'], mongo_values['conversation_id']))
+    print(chat(mongo_values['bearer_token'], mongo_values['conversation_id']))
 
 
 main()
-
-# Next choice continue assessment or add symptoms

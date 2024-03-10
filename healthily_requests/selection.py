@@ -24,7 +24,6 @@ def get_mongo_values():
 
     # Find the document by its _id field
     document = collection.find_one({"_id": ObjectId('65eccdcca76d4803694c0cb2')})
-    print(document)
 
     if document:
         return document
@@ -33,18 +32,15 @@ def get_mongo_values():
         return None
 
 
-def confirm_symtoms(bearer_token, conversation):
+def add_duration(bearer_token, conversation):
     payload = {
         "answer": {
-            "type": "generic",
-            "input": {
-                "include": ["assessment_C0000737"],
-                "exclude": []
-            }
+            "type": "symptom",
+            "selection": ["y"]
         },
         "conversation": {
             "id": conversation
-        } 
+        }
     }
     headers = {
         "accept": "application/json",
@@ -81,9 +77,9 @@ def confirm_symtoms(bearer_token, conversation):
 def main():
     mongo_values = get_mongo_values()
 
-    print(confirm_symtoms(mongo_values['bearer_token'], mongo_values['conversation_id']))
+    print(add_duration(mongo_values['bearer_token'], mongo_values['conversation_id']))
 
 
 main()
 
-# Next choice continue assessment or add symptoms
+# Take the question type and choice id + text. Surface text as options and choice id as input
