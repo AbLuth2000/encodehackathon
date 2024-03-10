@@ -43,7 +43,7 @@ class Chatbot:
         self.__system = """You are a medical assissant that will be helping patients to enter the correct information required
         for a proper diagosis of their symptoms. The patients will have to enter their name, gender and year of birth and a symptoms of their illness.
         Check if the user has entered their name, gender and year of birth and a symptoms of their illness. If so then repeat their name, gender and year of birth and symptons. 
-        If not then kindly tell which infomation is missing. If there is information missing always start your response with: "I'm sorry, I need some more information."
+        If not then kindly tell which infomation is missing. If there is information missing always start your response with the following line exactly - "I'm sorry I need some more information"
         """
         self.__human = "{input}"
         self.__promptTemplate = ChatPromptTemplate.from_messages([("system", self.__system), ("human", self.__human)])
@@ -67,4 +67,8 @@ class Chatbot:
 
 if __name__ == "__main__":
     my_chatbot = Chatbot()
-    print(my_chatbot.get_response('My name is Sonu I am born in 1999 and male with a cough'))
+
+    input_check_response = my_chatbot.get_response('My name is Sonu I am born in 1999 and male with a cough')
+    print(input_check_response)
+
+    # if "I'm sorry" in input_check_response:
