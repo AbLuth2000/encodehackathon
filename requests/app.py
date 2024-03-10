@@ -24,8 +24,9 @@ def user_start_covo():
     if "I'm Sorry" in response:
         result = False
     else:
-        reuslt = True
+        result = True
     return result
+
 
 @app.route('/user_chat_general', methods=['POST'])
 @cross_origin()
@@ -37,6 +38,7 @@ def user_char_general():
     my_general_chat = chatbot_general.Chatbot(context)
     result = my_general_chat.get_response(prompt)
     return result
+
 
 if __name__ == "__main__":
     my_chatbot = Chatbot()
