@@ -14,6 +14,12 @@ Issues that were noticed with the Healthily API werer that after receiving advic
 
 We are proposing a compassion-focused and decision-oriented chatbot that empowers users to make informed healthcare decisions with trust and confidence. This solution uses the Healthily API as the base to diagnose and run an example consultation workflow. This process was both slow and clunky due to the survey-like nature of the current consultation workflow. Our solution is more personable with enhanced outputs using external LLMs to make the outputs more comforting and compassionate. However, this in no way impacts the outputs that Healthily's API provides and all required information is consistent which required payloads. Our external LLMs do no triaging and are simply used for language processing and improving. We also allow for more accessibility focused on targeting groups such as elderly people, people with neurological impairments and people with disabilities who may have trouble using the current Healthily workflow. We offer a text-to-speech feature for our outputs using OpenAI's Whisper API which allows these target groups to have greater accessibility to the platform. 
 
+## Technology Stack
+Our intention with this solution was the following workflow:
+- A react front-end acting as a chatbot - very similar to a WhatsApp coversation.
+- This takes both the user inputs and passes them through a Flask API into our backend python functions.
+- Our python functions we call the Healthily API with their inputs.
+- We then use the Healthily API's outputs and pass them into our 'enhance' function which uses Perplexity's API and makes the outputs more compassionate. These new and improved outputs are then returned to the react app as a message. The original meaning of Healthily's outputs remains the same, as do the sentences themselves. This means nothing is lst within the consultation workflow.
 
 ## Features
 - [Next.js](https://nextjs.org) App Router
