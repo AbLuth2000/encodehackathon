@@ -1,5 +1,5 @@
 <a href="[[https://nuxt-ai-careguide.vercel.app]">
-  <img alt="CareGuide Healthily" src="https://drive.google.com/file/d/1r9p1KJ-7wzZwcSEmT_j_GK8Lo_JP_6zp/view">
+  <img alt="CareGuide Healthily" src="https://github.com/AbLuth2000/encodehackathon/blob/main/public/Computer%20User%20Interface.png">
   <h1 align="center">CareGuide </h1>
 </a>
 
