@@ -10,10 +10,12 @@
 
 ## Summary
 This project uses the Healthily API as the basis for diagnosing a patient's symptoms and outputting a report with the best service to go to for treatment.
-The issue with the Healthily API is the 
+Issues that were noticed with the Healthily API werer that after receiving advice on the Healthily DOT, seeing a doctor is not needed. However, users still decide to book a GP appointment as they do not fully trust the outcome of the diagnosis. This is a practical issue about trust - the platform is not serving its true purpose of deferring mild patients away from GPs, which both increases the workload on GPs and also doctors, where it is unnecassary.
+
+We are proposing a compassion-focused and decision-oriented chatbot that empowers users to make informed healthcare decisions with trust and confidence. This solution uses the Healthily API as the base to diagnose and run an example consultation workflow. This process was both slow and clunky due to the survey-like nature of the current consultation workflow. Our solution is more personable with enhanced outputs using external LLMs to make the outputs more comforting and compassionate. However, this in no way impacts the outputs that Healthily's API provides and all required information is consistent which required payloads. Our external LLMs do no triaging and are simply used for language processing and improving. We also allow for more accessibility focused on targeting groups such as elderly people, people with neurological impairments and people with disabilities who may have trouble using the current Healthily workflow. We offer a text-to-speech feature for our outputs using OpenAI's Whisper API which allows these target groups to have greater accessibility to the platform. 
+
 
 ## Features
-
 - [Next.js](https://nextjs.org) App Router
 - React Server Components (RSCs), Suspense, and Server Actions
 - [Vercel AI SDK](https://sdk.vercel.ai/docs) for streaming chat UI
