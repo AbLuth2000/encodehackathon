@@ -65,10 +65,8 @@ class Chatbot:
         return response.content
 
 
-if __name__ == "__main__":
+def main():
     my_chatbot = Chatbot()
 
     input_check_response = my_chatbot.get_response('My name is Sonu I am born in 1999 and male with a cough')
     print(input_check_response)
-
-    # if "I'm sorry" in input_check_response:
