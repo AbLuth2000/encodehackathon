@@ -31,9 +31,9 @@ This template ships with OpenAI `gpt-3.5-turbo` as the default. However, thanks 
 
 This library is created by CareGuide and their team members, with contributions from:
 
-- Ebhyuday Luthra
+- Abhyuday Luthra
 - Adrian Yan
 - Emily Zhao
 - Jetnor Muhaj
-- Sonu Telkar
+- Srivatsa Telkar
 - Stefany Santos
